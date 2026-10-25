@@ -1,15 +1,54 @@
 <view class="container">
-  <!-- 天气条（P5 接入实时数据） -->
-  <view class="card weather-bar">
-    <text class="weather-text">天气 · 待接入</text>
+  <!-- 顶部问候 -->
+  <view class="greet-row">
+    <view>
+      <view class="greet">{{greeting}}</view>
+      <view class="date">{{dateText}} · 今天的你怎么搭都好看</view>
+    </view>
+    <view class="mini-stats" bindtap="goCalendar">
+      <view class="stat-num">{{monthCheckins}}</view>
+      <view class="stat-label">本月打卡</view>
+    </view>
   </view>
 
   <!-- 今日橱窗大图陈列区 -->
   <view class="card showcase">
-    <view class="showcase-title">今日橱窗</view>
-    <view wx:if="{{!hasCheckin}}" class="empty">
-      <view>今天还没有陈列穿搭</view>
+    <view class="showcase-head">
+      <text class="showcase-title">✨ 今日橱窗</text>
+      <text class="showcase-sub" bindtap="goCalendar">打卡日历 ›</text>
+    </view>
+
+    <view wx:if="{{hasCheckin}}" class="showcase-body">
+      <view class="spotlight">
+        <image wx:for="{{items}}" wx:key="clothId" class="showcase-img" src="{{item.imageFull}}" mode="aspectFill" />
+      </view>
+      <view wx:if="{{note}}" class="showcase-note">📝 {{note}}</view>
+    </view>
+
+    <view wx:else class="empty">
+      <text class="empty-icon">🪟</text>
+      <view>今天的橱窗还空着</view>
+      <view class="empty-sub">把今天的穿搭陈列出来吧</view>
       <button class="btn-primary go-btn" bindtap="goMatcher">去搭配</button>
     </view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-row">
+    <view class="quick-card" bindtap="goWardrobe">
+      <text class="quick-icon">👔</text>
+      <view class="quick-num">{{totalCloth}}</view>
+      <view class="quick-label">在柜衣物</view>
+    </view>
+    <view class="quick-card" bindtap="goCalendar">
+      <text class="quick-icon">📅</text>
+      <view class="quick-num">{{hasCheckin ? '已打卡' : '待打卡'}}</view>
+      <view class="quick-label">今日状态</view>
+    </view>
+  </view>
+
+  <!-- 天气条（P5 接入实时数据） -->
+  <view class="card weather-bar">
+    <text class="weather-text">🌤 天气推荐 · 即将上线</text>
   </view>
 </view>

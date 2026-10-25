@@ -1,21 +1,183 @@
+.container {
+  padding: 24rpx 24rpx 60rpx;
+}
+.cal-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 26rpx;
+  margin-bottom: 24rpx;
+}
 .cal-head {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18rpx;
+}
+.cal-title {
   font-size: 32rpx;
+  font-weight: 600;
+}
+.nav-btn {
+  font-size: 44rpx;
+  color: #666;
+  padding: 0 24rpx;
+}
+.week-row, .cal-row {
+  display: flex;
+}
+.week-cell, .day-cell {
+  flex: 1;
+  text-align: center;
+  height: 92rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.week-cell {
+  font-size: 22rpx;
+  color: #aaa;
+}
+.day-cell {
+  border-radius: 12rpx;
+  padding-top: 8rpx;
+  position: relative;
+}
+.day-cell.today {
+  background: #f0f4ff;
+}
+.day-cell.selected {
+  background: #1a1a1a;
+}
+.day-cell.selected .day-num {
+  color: #fff;
+}
+.day-num {
+  font-size: 26rpx;
+  color: #333;
+}
+.day-thumb {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 10rpx;
+  margin-top: 4rpx;
+  background: #f0f0f0;
+}
+.dot {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: #1a1a1a;
+  margin-top: 10rpx;
+}
+
+.detail-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 26rpx;
+}
+.detail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18rpx;
+}
+.detail-title {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+.cancel-link {
+  font-size: 24rpx;
+  color: #d43f3f;
+}
+.day-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx;
+}
+.day-img {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  background: #f0f0f0;
+}
+.note {
+  margin-top: 16rpx;
+  font-size: 25rpx;
+  color: #666;
+}
+.checkin-btn {
+  margin-top: 30rpx;
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+.empty-tip {
+  color: #aaa;
+  font-size: 25rpx;
+  padding: 30rpx 0;
+  text-align: center;
+}
+.go-btn {
+  margin-top: 20rpx;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: 36rpx;
+  width: 260rpx;
+}
+
+.mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  z-index: 100;
+}
+.picker {
+  width: 100%;
+  background: #fff;
+  border-radius: 30rpx 30rpx 0 0;
+  padding: 34rpx 30rpx calc(30rpx + env(safe-area-inset-bottom));
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.picker-title {
+  font-size: 30rpx;
   font-weight: 600;
   margin-bottom: 20rpx;
 }
-.cal-week, .cal-row {
-  display: flex;
-}
-.cal-wk, .cal-cell {
-  flex: 1;
-  text-align: center;
-  padding: 14rpx 0;
+.picker-input {
+  background: #f6f6f6;
+  border-radius: 12rpx;
+  padding: 16rpx 24rpx;
   font-size: 26rpx;
-  color: #666;
+  margin-bottom: 24rpx;
 }
-.cal-cell {
-  color: #1a1a1a;
-  height: 88rpx;
-  line-height: 60rpx;
+.outfit-row {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #f2f2f2;
 }
+.outfit-thumbs {
+  display: flex;
+  gap: 8rpx;
+  flex: 1;
+}
+.pick-thumb {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 10rpx;
+  background: #f0f0f0;
+}
+.outfit-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16rpx;
+}
+.outfit-name { font-size: 27rpx; }
+.outfit-scene { font-size: 22rpx; color: #999; margin-top: 4rpx; }
+.pick-arrow { color: #1a1a1a; font-size: 34rpx; }

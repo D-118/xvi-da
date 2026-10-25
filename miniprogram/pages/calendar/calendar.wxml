@@ -1,12 +1,62 @@
 <view class="container">
-  <view class="card cal-card">
-    <view class="cal-head">{{year}} 年 {{month}} 月</view>
-    <view class="cal-week">
-      <text wx:for="{{['日','一','二','三','四','五','六']}}" wx:key="*this" class="cal-wk">{{item}}</text>
+  <!-- 月历卡片 -->
+  <view class="cal-card">
+    <view class="cal-head">
+      <text class="nav-btn" bindtap="prevMonth">‹</text>
+      <text class="cal-title">{{monthText}}</text>
+      <text class="nav-btn" bindtap="nextMonth">›</text>
     </view>
-    <view class="cal-grid">
-      <view wx:for="{{weeks}}" wx:key="index" class="cal-row">
-        <view wx:for="{{item}}" wx:for-item="d" wx:key="*this" class="cal-cell">{{d || ''}}</view>
+    <view class="week-row">
+      <text wx:for="{{['日','一','二','三','四','五','六']}}" wx:key="*this" class="week-cell">{{item}}</text>
+    </view>
+    <view wx:for="{{weeks}}" wx:key="index" class="cal-row">
+      <view wx:for="{{item}}" wx:key="index" wx:for-item="cell"
+            class="day-cell {{cell.date === today ? 'today' : ''}} {{cell.date === selected ? 'selected' : ''}}"
+            data-date="{{cell.date}}" bindtap="tapDay">
+        <text wx:if="{{cell.day}}" class="day-num">{{cell.day}}</text>
+        <image wx:if="{{cell.hasCheckin && cell.thumb}}" class="day-thumb" src="{{cell.thumb}}" mode="aspectFill" />
+        <view wx:elif="{{cell.hasCheckin}}" class="dot"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 当日详情 -->
+  <view class="detail-card">
+    <view class="detail-head">
+      <text class="detail-title">{{selected || '点选日期查看'}}</text>
+      <text wx:if="{{dayDetail}}" class="cancel-link" bindtap="cancelCheckin">取消打卡</text>
+    </view>
+
+    <view wx:if="{{dayDetail}}" class="day-items">
+      <image wx:for="{{dayDetail.items}}" wx:key="clothId" class="day-img" src="{{item.imageFull}}" mode="aspectFill" />
+    </view>
+    <view wx:if="{{dayDetail && dayDetail.note}}" class="note">📝 {{dayDetail.note}}</view>
+
+    <button wx:if="{{selected && !dayDetail && selected <= today}}" class="checkin-btn" bindtap="openPicker">
+      📸 {{selected === today ? '今日橱窗打卡' : '给这天补打卡'}}
+    </button>
+    <view wx:if="{{selected > today}}" class="empty-tip">未来的日子还不能打卡哦</view>
+  </view>
+
+  <!-- 打卡面板 -->
+  <view wx:if="{{showPicker}}" class="mask" bindtap="closePicker">
+    <view class="picker" catchtap="">
+      <view class="picker-title">选择穿搭打卡（{{pickerDate}}）</view>
+      <input class="picker-input" placeholder="备注一句今天的心情（选填）" value="{{note}}" bindinput="onNote" />
+      <view wx:for="{{outfits}}" wx:key="id" class="outfit-row"
+            data-id="{{item.id}}" bindtap="pickOutfit">
+        <view class="outfit-thumbs">
+          <image wx:for="{{item.thumbs}}" wx:for-item="t" wx:key="*this" class="pick-thumb" src="{{t}}" mode="aspectFill" />
+        </view>
+        <view class="outfit-info">
+          <text class="outfit-name">{{item.name}}</text>
+          <text class="outfit-scene">{{item.scene}}</text>
+        </view>
+        <text class="pick-arrow">✓</text>
+      </view>
+      <view wx:if="{{outfits.length === 0}}" class="empty-tip">
+        还没有保存的搭配方案，先去「搭配」页搭一套吧
+        <button class="go-btn" bindtap="goMatcher">去搭配</button>
       </view>
     </view>
   </view>
