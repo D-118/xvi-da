@@ -1,0 +1,21 @@
+# Java / Maven
+server/target/
+*.class
+
+# 本地敏感配置（数据库密码、AppSecret、天气 key 等，禁止提交）
+server/src/main/resources/application-local.yml
+
+# 运行时上传的图片
+upload/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# 小程序
+miniprogram/project.private.config.json

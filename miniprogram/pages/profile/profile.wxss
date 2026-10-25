@@ -1,0 +1,9 @@
+.nickname {
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}

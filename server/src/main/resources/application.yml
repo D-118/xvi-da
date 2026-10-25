@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: xvi-da-server
+  profiles:
+    # application-local.yml 存放数据库密码等敏感配置，已加入 .gitignore
+    include: local
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xvda?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    # 账号密码在 application-local.yml 中覆盖（该文件已加入 .gitignore）
+    username: root
+    password: ""
+    hikari:
+      # 数据库未就绪时允许启动，首次访问再建连接
+      initialization-fail-timeout: -1
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# 文件上传落盘目录（图片通过 /upload/** 静态映射访问）
+xvda:
+  upload-dir: ./upload
+  wx:
+    appid: ${WX_APPID:}
+    secret: ""
+  jwt:
+    secret: ""
+    expire-hours: 168
+  weather:
+    key: ""

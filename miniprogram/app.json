@@ -1,0 +1,32 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/wardrobe/wardrobe",
+    "pages/matcher/matcher",
+    "pages/calendar/calendar",
+    "pages/profile/profile",
+    "pages/login/login"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "XVI・搭",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f6f6",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1a1a1a",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/home/home", "text": "橱窗" },
+      { "pagePath": "pages/wardrobe/wardrobe", "text": "衣橱" },
+      { "pagePath": "pages/matcher/matcher", "text": "搭配" },
+      { "pagePath": "pages/calendar/calendar", "text": "日历" },
+      { "pagePath": "pages/profile/profile", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

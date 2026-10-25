@@ -1,0 +1,15 @@
+<view class="container">
+  <!-- 天气条（P5 接入实时数据） -->
+  <view class="card weather-bar">
+    <text class="weather-text">天气 · 待接入</text>
+  </view>
+
+  <!-- 今日橱窗大图陈列区 -->
+  <view class="card showcase">
+    <view class="showcase-title">今日橱窗</view>
+    <view wx:if="{{!hasCheckin}}" class="empty">
+      <view>今天还没有陈列穿搭</view>
+      <button class="btn-primary go-btn" bindtap="goMatcher">去搭配</button>
+    </view>
+  </view>
+</view>

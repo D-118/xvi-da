@@ -1,0 +1,16 @@
+<view class="container">
+  <view wx:for="{{slots}}" wx:key="slot" class="card slot-row">
+    <view class="slot-name">{{item.name}}</view>
+    <scroll-view scroll-x class="slot-scroll">
+      <view class="slot-items">
+        <view wx:for="{{item.items}}" wx:key="id" class="slot-item"></view>
+        <view wx:if="{{item.items.length === 0}}" class="slot-empty">该分类暂无衣物</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="action-bar">
+    <button class="btn-primary action-btn">随机来一套</button>
+    <button class="btn-primary action-btn">保存搭配</button>
+  </view>
+</view>

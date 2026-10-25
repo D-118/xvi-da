@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="card user-card">
+    <view class="nickname">{{nickname || '未设置昵称'}}</view>
+  </view>
+
+  <view class="card">
+    <view class="card-title">衣橱统计</view>
+    <view class="empty">统计功能 P6 接入</view>
+  </view>
+</view>

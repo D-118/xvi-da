@@ -1,0 +1,5 @@
+<view class="login-page">
+  <view class="logo">XVI・搭</view>
+  <view class="slogan">你的电子衣橱 · 每日穿搭橱窗</view>
+  <button class="btn-primary login-btn" loading="{{logging}}" bindtap="doLogin">微信一键登录</button>
+</view>

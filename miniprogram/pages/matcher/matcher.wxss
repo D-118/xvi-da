@@ -1,0 +1,36 @@
+.slot-row {
+  display: flex;
+  align-items: center;
+}
+.slot-name {
+  width: 100rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.slot-scroll {
+  flex: 1;
+  white-space: nowrap;
+}
+.slot-items {
+  display: inline-flex;
+}
+.slot-item {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  background: #f0f0f0;
+  margin-right: 16rpx;
+}
+.slot-empty {
+  color: #bbb;
+  font-size: 24rpx;
+  line-height: 140rpx;
+}
+.action-bar {
+  display: flex;
+  margin-top: 40rpx;
+}
+.action-btn {
+  flex: 1;
+  margin: 0 12rpx;
+}

@@ -1,0 +1,22 @@
+<view class="container">
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索衣物" value="{{keyword}}" />
+  </view>
+
+  <view class="cat-tabs">
+    <text class="chip {{category === 0 ? 'active' : ''}}">全部</text>
+    <text class="chip {{category === 1 ? 'active' : ''}}">上装</text>
+    <text class="chip {{category === 2 ? 'active' : ''}}">下装</text>
+    <text class="chip {{category === 3 ? 'active' : ''}}">鞋</text>
+    <text class="chip {{category === 4 ? 'active' : ''}}">配饰</text>
+  </view>
+
+  <view class="grid">
+    <view wx:for="{{list}}" wx:key="id" class="cloth-card">
+      <image class="cloth-img" src="{{item.imageUrl}}" mode="aspectFill" />
+      <view class="cloth-name">{{item.name}}</view>
+    </view>
+  </view>
+
+  <view wx:if="{{list.length === 0}}" class="empty">衣橱还是空的，快去添加第一件衣物吧</view>
+</view>
