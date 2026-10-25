@@ -1,16 +1,61 @@
 <view class="container">
-  <view wx:for="{{slots}}" wx:key="slot" class="card slot-row">
-    <view class="slot-name">{{item.name}}</view>
-    <scroll-view scroll-x class="slot-scroll">
-      <view class="slot-items">
-        <view wx:for="{{item.items}}" wx:key="id" class="slot-item"></view>
-        <view wx:if="{{item.items.length === 0}}" class="slot-empty">该分类暂无衣物</view>
+  <!-- 搭配台 -->
+  <view class="board">
+    <view class="board-head">
+      <text class="board-title">搭配台</text>
+      <view class="board-actions">
+        <text class="mini-btn" bindtap="randomPick">🎲 随机来一套</text>
+        <text class="mini-btn" bindtap="clearPick">清空</text>
       </view>
-    </scroll-view>
+    </view>
+
+    <!-- 四个滑道 -->
+    <view wx:for="{{slots}}" wx:key="slot" wx:for-item="s" class="lane">
+      <view class="lane-head">
+        <text class="lane-name">{{s.name}}</text>
+        <text class="lane-count">{{s.items.length}} 件</text>
+      </view>
+      <scroll-view scroll-x class="lane-scroll">
+        <view class="lane-items" wx:if="{{s.items.length > 0}}">
+          <image wx:for="{{s.items}}" wx:key="id" wx:for-item="cloth"
+                 class="lane-img {{s.picked && s.picked.id === cloth.id ? 'picked' : ''}}"
+                 src="{{cloth.imageFull}}" mode="aspectFill"
+                 data-slot="{{s.slot}}" data-id="{{cloth.id}}" bindtap="pick" />
+        </view>
+        <view wx:else class="lane-empty">该分类还没有衣物</view>
+      </scroll-view>
+    </view>
+
+    <!-- 方案信息 -->
+    <view class="save-row">
+      <input class="save-input" placeholder="方案名称（可空）" value="{{name}}" bindinput="onName" />
+      <view class="scene-chips">
+        <text wx:for="{{scenes}}" wx:key="*this" class="scene-chip {{scene === item ? 'active' : ''}}"
+              data-value="{{item}}" bindtap="setScene">{{item}}</text>
+      </view>
+    </view>
+    <button class="save-btn" bindtap="save" loading="{{saving}}">保存这套搭配</button>
   </view>
 
-  <view class="action-bar">
-    <button class="btn-primary action-btn">随机来一套</button>
-    <button class="btn-primary action-btn">保存搭配</button>
+  <!-- 我的方案 -->
+  <view class="outfits-head" bindtap="toggleOutfits">
+    <text class="board-title">我的方案（{{outfits.length}}）</text>
+    <text>{{showOutfits ? '收起 ▲' : '展开 ▼'}}</text>
+  </view>
+  <view wx:if="{{showOutfits}}" class="outfit-list">
+    <view wx:for="{{outfits}}" wx:key="id" class="outfit-card">
+      <view class="outfit-top">
+        <text class="outfit-name">{{item.name}}</text>
+        <text class="outfit-scene">{{item.scene}}</text>
+      </view>
+      <view class="outfit-thumbs">
+        <image wx:for="{{item.thumbs}}" wx:for-item="t" wx:key="*this" class="thumb" src="{{t}}" mode="aspectFill" />
+      </view>
+      <view class="outfit-actions">
+        <text class="mini-btn" data-id="{{item.id}}" bindtap="reuse">🔁 复用回填</text>
+        <text class="mini-btn danger" data-id="{{item.id}}" bindtap="deleteOutfit">删除</text>
+      </view>
+    </view>
+    <view wx:if="{{outfits.length === 0}}" class="empty">还没有保存过搭配方案</view>
   </view>
 </view>
