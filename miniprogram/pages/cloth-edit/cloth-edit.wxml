@@ -1,0 +1,65 @@
+<view class="container">
+  <!-- 图片上传 -->
+  <view class="section">
+    <view class="section-title">衣物照片</view>
+    <view wx:if="{{!imageUrl}}" class="img-picker" bindtap="chooseImage">
+      <text class="picker-icon">📷</text>
+      <text class="picker-text">拍照 / 从相册选择</text>
+    </view>
+    <view wx:else class="img-preview-wrap">
+      <image class="img-preview" src="{{imageFull}}" mode="aspectFill" bindtap="chooseImage" />
+      <text class="img-hint">点击可更换</text>
+    </view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="section">
+    <view class="section-title">名称</view>
+    <input class="input" placeholder="如：白色oversize衬衫" maxlength="50" value="{{name}}" bindinput="onName" />
+  </view>
+
+  <view class="section">
+    <view class="section-title">分类</view>
+    <view class="chips">
+      <text wx:for="{{categories}}" wx:key="value" class="chip {{category === item.value ? 'active' : ''}}"
+            data-value="{{item.value}}" bindtap="pickCategory">{{item.icon}} {{item.label}}</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">主色</view>
+    <view class="chips">
+      <text wx:for="{{colors}}" wx:key="*this" class="chip {{color === item ? 'active' : ''}}"
+            data-value="{{item}}" bindtap="pickColor">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">适用季节（必选）</view>
+    <view class="chips">
+      <text wx:for="{{seasons}}" wx:key="*this" class="chip {{seasonsSel.indexOf(item) >= 0 ? 'active' : ''}}"
+            data-value="{{item}}" bindtap="toggleSeason">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">适用场合（可多选）</view>
+    <view class="chips">
+      <text wx:for="{{scenes}}" wx:key="*this" class="chip {{scenesSel.indexOf(item) >= 0 ? 'active' : ''}}"
+            data-value="{{item}}" bindtap="toggleScene">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="row2">
+    <view class="half">
+      <view class="section-title">品牌（选填）</view>
+      <input class="input" placeholder="品牌" maxlength="50" value="{{brand}}" bindinput="onBrand" />
+    </view>
+    <view class="half">
+      <view class="section-title">价格（选填）</view>
+      <input class="input" type="digit" placeholder="¥" value="{{price}}" bindinput="onPrice" />
+    </view>
+  </view>
+
+  <button class="submit-btn" bindtap="submit" loading="{{submitting}}">{{isEdit ? '保存修改' : '收入衣橱'}}</button>
+</view>

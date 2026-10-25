@@ -1,0 +1,79 @@
+.container {
+  padding-bottom: 60rpx;
+}
+.hero {
+  width: 100%;
+  height: 640rpx;
+  background: #f0f0f0;
+}
+.card {
+  margin: 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+.name {
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.archive-badge {
+  font-size: 22rpx;
+  color: #2e7d32;
+  background: #e8f5e9;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+}
+.archive-badge.archived {
+  color: #8d6e63;
+  background: #efebe9;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-bottom: 26rpx;
+}
+.tag {
+  font-size: 24rpx;
+  color: #555;
+  background: #f4f4f4;
+  border-radius: 8rpx;
+  padding: 8rpx 18rpx;
+}
+.tag.main {
+  color: #fff;
+  background: #1a1a1a;
+}
+.rows { display: flex; flex-direction: column; gap: 18rpx; }
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 27rpx;
+  color: #333;
+}
+.label { color: #999; }
+.btns {
+  display: flex;
+  gap: 20rpx;
+  padding: 10rpx 24rpx 0;
+}
+.btn {
+  flex: 1;
+  font-size: 26rpx;
+  border-radius: 12rpx;
+  line-height: 2.6;
+}
+.btn.ghost {
+  background: #fff;
+  color: #333;
+}
+.btn.danger {
+  background: #fff;
+  color: #d43f3f;
+}

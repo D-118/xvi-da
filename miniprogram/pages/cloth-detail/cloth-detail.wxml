@@ -1,0 +1,33 @@
+<view class="container" wx:if="{{cloth}}">
+  <image class="hero" src="{{imageFull}}" mode="aspectFill" />
+
+  <view class="card">
+    <view class="head">
+      <view class="name">{{cloth.name}}</view>
+      <view class="archive-badge {{cloth.archived === 1 ? 'archived' : ''}}">
+        {{cloth.archived === 1 ? '已归档' : '在柜'}}
+      </view>
+    </view>
+
+    <view class="tags">
+      <text class="tag main">{{cloth.categoryLabel}}</text>
+      <text wx:if="{{cloth.color}}" class="tag">{{cloth.color}}</text>
+      <text wx:for="{{cloth.seasonList}}" wx:key="*this" class="tag">{{item}}</text>
+    </view>
+
+    <view class="rows">
+      <view class="row" wx:if="{{cloth.brand}}"><text class="label">品牌</text><text>{{cloth.brand}}</text></view>
+      <view class="row" wx:if="{{cloth.price != null}}"><text class="label">价格</text><text>¥{{cloth.price}}</text></view>
+      <view class="row" wx:if="{{cloth.sceneList.length > 0}}"><text class="label">场合</text><text>{{cloth.scenes}}</text></view>
+      <view class="row"><text class="label">累计穿着</text><text>{{cloth.wearCount || 0}} 次</text></view>
+      <view class="row" wx:if="{{cloth.lastWearDate}}"><text class="label">最近穿着</text><text>{{cloth.lastWearDate}}</text></view>
+      <view class="row"><text class="label">入橱时间</text><text>{{cloth.createdAt}}</text></view>
+    </view>
+  </view>
+
+  <view class="btns">
+    <button class="btn ghost" bindtap="toggleArchive">{{cloth.archived === 1 ? '取回在柜' : '换季归档'}}</button>
+    <button class="btn ghost" bindtap="goEdit">编辑</button>
+    <button class="btn danger" bindtap="confirmDelete">删除</button>
+  </view>
+</view>

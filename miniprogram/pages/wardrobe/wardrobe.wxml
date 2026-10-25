@@ -1,22 +1,48 @@
 <view class="container">
+  <!-- 搜索栏 -->
   <view class="search-bar">
-    <input class="search-input" placeholder="搜索衣物" value="{{keyword}}" />
+    <input class="search-input" placeholder="搜索名称或品牌" value="{{keyword}}"
+           confirm-type="search" bindinput="onKeywordInput" bindconfirm="onSearch" />
+    <text class="archive-toggle" bindtap="switchArchived">{{archived === 0 ? '🧺 在柜' : '📦 已归档'}}</text>
   </view>
 
-  <view class="cat-tabs">
-    <text class="chip {{category === 0 ? 'active' : ''}}">全部</text>
-    <text class="chip {{category === 1 ? 'active' : ''}}">上装</text>
-    <text class="chip {{category === 2 ? 'active' : ''}}">下装</text>
-    <text class="chip {{category === 3 ? 'active' : ''}}">鞋</text>
-    <text class="chip {{category === 4 ? 'active' : ''}}">配饰</text>
-  </view>
+  <!-- 分类 Tab -->
+  <scroll-view scroll-x class="cat-tabs-scroll">
+    <view class="cat-tabs">
+      <text class="chip {{category === 0 ? 'active' : ''}}" data-value="0" bindtap="switchCategory">全部</text>
+      <text wx:for="{{categories}}" wx:key="value" class="chip {{category === item.value ? 'active' : ''}}"
+            data-value="{{item.value}}" bindtap="switchCategory">{{item.label}}</text>
+    </view>
+  </scroll-view>
 
+  <!-- 数量统计 -->
+  <view class="count-row" wx:if="{{list.length > 0}}">共 {{total}} 件</view>
+
+  <!-- 衣物瀑布 -->
   <view class="grid">
-    <view wx:for="{{list}}" wx:key="id" class="cloth-card">
-      <image class="cloth-img" src="{{item.imageUrl}}" mode="aspectFill" />
-      <view class="cloth-name">{{item.name}}</view>
+    <view wx:for="{{list}}" wx:key="id" class="cloth-card" data-id="{{item.id}}" bindtap="goDetail">
+      <image class="cloth-img" src="{{item.imageFull}}" mode="aspectFill" lazy-load />
+      <view class="cloth-info">
+        <view class="cloth-name">{{item.name}}</view>
+        <view class="cloth-meta">
+          <text class="tag">{{item.categoryLabel}}</text>
+          <text wx:if="{{item.color}}" class="tag">{{item.color}}</text>
+          <text wx:if="{{item.wearCount > 0}}" class="tag worn">穿过{{item.wearCount}}次</text>
+        </view>
+      </view>
     </view>
   </view>
 
-  <view wx:if="{{list.length === 0}}" class="empty">衣橱还是空的，快去添加第一件衣物吧</view>
+  <!-- 空态 -->
+  <view wx:if="{{!loading && list.length === 0}}" class="empty">
+    <text class="empty-icon">🪞</text>
+    <view>{{archived === 0 ? '衣橱还是空的，快去添加第一件衣物吧' : '暂无已归档的衣物'}}</view>
+  </view>
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading">加载中…</view>
+  <view wx:if="{{finished && list.length > 0}}" class="loading">— 到底啦 —</view>
+
+  <!-- 悬浮添加按钮 -->
+  <view class="fab" bindtap="goAdd">＋</view>
 </view>

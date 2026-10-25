@@ -5,7 +5,9 @@
     "pages/matcher/matcher",
     "pages/calendar/calendar",
     "pages/profile/profile",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/cloth-edit/cloth-edit",
+    "pages/cloth-detail/cloth-detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
