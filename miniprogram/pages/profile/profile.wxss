@@ -1,9 +1,101 @@
-.nickname {
-  font-size: 34rpx;
-  font-weight: 600;
+.container { padding: 24rpx; }
+
+.card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
 }
+
 .card-title {
   font-size: 30rpx;
   font-weight: 600;
-  margin-bottom: 16rpx;
+  margin-bottom: 20rpx;
+  color: #26262e;
+}
+
+/* 用户卡 */
+.user-card { display: flex; align-items: center; }
+.avatar-holder {
+  width: 100rpx; height: 100rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  color: #fff; font-size: 44rpx;
+  display: flex; align-items: center; justify-content: center;
+  margin-right: 24rpx;
+}
+.user-info { flex: 1; }
+.nickname { font-size: 34rpx; font-weight: 600; color: #26262e; }
+.edit-icon { font-size: 26rpx; color: #b2b2bb; margin-left: 8rpx; }
+.sub { font-size: 24rpx; color: #9a9aa5; margin-top: 6rpx; }
+
+/* 统计网格 */
+.stat-grid { display: flex; margin-bottom: 28rpx; }
+.stat-cell { flex: 1; text-align: center; }
+.stat-cell .num { font-size: 40rpx; font-weight: 700; color: #6c5ce7; }
+.stat-cell .lbl { font-size: 22rpx; color: #9a9aa5; margin-top: 4rpx; }
+
+.dist-title {
+  font-size: 24rpx; color: #9a9aa5;
+  margin: 20rpx 0 12rpx;
+}
+
+/* 分布条 */
+.bar-list { margin-bottom: 8rpx; }
+.bar-row { display: flex; align-items: center; margin-bottom: 14rpx; }
+.bar-lbl { width: 80rpx; font-size: 24rpx; color: #55555f; }
+.bar-track {
+  flex: 1; height: 16rpx;
+  background: #f1f1f5;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+  border-radius: 8rpx;
+  transition: width 0.4s;
+}
+.bar-fill.season { background: linear-gradient(90deg, #00b894, #55efc4); }
+.bar-num { width: 56rpx; text-align: right; font-size: 24rpx; color: #55555f; }
+
+/* 排行行 */
+.rank-row {
+  display: flex; align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f4f4f8;
+}
+.rank-row:last-child { border-bottom: none; }
+.rank-no {
+  width: 48rpx; font-size: 30rpx; font-weight: 700;
+  color: #c5c5cf; text-align: center;
+}
+.rank-no.hot { color: #fd7014; }
+.rank-img {
+  width: 88rpx; height: 88rpx;
+  border-radius: 12rpx;
+  background: #f4f4f8;
+  margin: 0 20rpx;
+}
+.rank-info { flex: 1; min-width: 0; }
+.rank-name {
+  font-size: 28rpx; color: #26262e;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.rank-sub { font-size: 22rpx; color: #9a9aa5; margin-top: 4rpx; }
+.rank-count { font-size: 24rpx; color: #9a9aa5; }
+.rank-count .n { font-size: 32rpx; font-weight: 700; color: #6c5ce7; }
+.rank-count.idle { color: #fd7014; font-weight: 600; }
+.idle-threshold {
+  font-size: 22rpx; color: #6c5ce7;
+  font-weight: 400;
+  float: right;
+}
+
+.empty {
+  text-align: center;
+  color: #b2b2bb;
+  font-size: 26rpx;
+  padding: 40rpx 0;
 }

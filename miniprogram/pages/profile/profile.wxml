@@ -1,10 +1,73 @@
 <view class="container">
+  <!-- 用户卡 -->
   <view class="card user-card">
-    <view class="nickname">{{nickname || '未设置昵称'}}</view>
+    <view class="avatar-holder">衣</view>
+    <view class="user-info">
+      <view class="nickname" bindtap="editNickname">{{nickname || '点击设置昵称'}} <text class="edit-icon">✎</text></view>
+      <view class="sub">XVI・搭 用户</view>
+    </view>
   </view>
 
+  <!-- 统计总览 -->
+  <view class="card" wx:if="{{stats}}">
+    <view class="card-title">衣橱总览</view>
+    <view class="stat-grid">
+      <view class="stat-cell"><view class="num">{{stats.total}}</view><view class="lbl">在库</view></view>
+      <view class="stat-cell"><view class="num">{{stats.archived}}</view><view class="lbl">已归档</view></view>
+      <view class="stat-cell"><view class="num">{{stats.checkinDays}}</view><view class="lbl">打卡天数</view></view>
+      <view class="stat-cell"><view class="num">{{stats.outfitCount}}</view><view class="lbl">搭配方案</view></view>
+    </view>
+    <view class="dist-title">分类分布</view>
+    <view class="bar-list">
+      <view class="bar-row" wx:for="{{stats.byCategory}}" wx:key="category">
+        <text class="bar-lbl">{{item.label}}</text>
+        <view class="bar-track">
+          <view class="bar-fill" style="width: {{stats.total + stats.archived > 0 ? item.count * 100 / (stats.total + stats.archived) : 0}}%"></view>
+        </view>
+        <text class="bar-num">{{item.count}}</text>
+      </view>
+    </view>
+    <view class="dist-title">季节分布（一件多季各计一次）</view>
+    <view class="bar-list">
+      <view class="bar-row" wx:for="{{stats.bySeason}}" wx:key="season">
+        <text class="bar-lbl">{{item.season}}</text>
+        <view class="bar-track">
+          <view class="bar-fill season" style="width: {{item.count * 10 > 100 ? 100 : item.count * 10}}%"></view>
+        </view>
+        <text class="bar-num">{{item.count}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 穿着频次 Top -->
+  <view class="card" wx:if="{{wearTop.length}}">
+    <view class="card-title">最爱穿 Top 5</view>
+    <view class="rank-row" wx:for="{{wearTop}}" wx:key="id" bindtap="goCloth" data-id="{{item.id}}">
+      <text class="rank-no {{index < 3 ? 'hot' : ''}}">{{index + 1}}</text>
+      <image class="rank-img" src="{{item.imageUrl}}" mode="aspectFill" />
+      <view class="rank-info">
+        <view class="rank-name">{{item.name}}</view>
+        <view class="rank-sub">{{item.categoryLabel}}</view>
+      </view>
+      <view class="rank-count"><text class="n">{{item.wearCount}}</text> 次</view>
+    </view>
+  </view>
+
+  <!-- 闲置提醒 -->
   <view class="card">
-    <view class="card-title">衣橱统计</view>
-    <view class="empty">统计功能 P6 接入</view>
+    <view class="card-title">闲置提醒
+      <picker range="{{[14, 30, 60, 90]}}" value="{{[14, 30, 60, 90].indexOf(idleDays)}}" bindchange="changeIdleDays">
+        <text class="idle-threshold">{{idleDays}}天未穿 ▾</text>
+      </picker>
+    </view>
+    <view wx:if="{{idle.length === 0 && !loading}}" class="empty">没有闲置衣物，衣橱利用率很棒 👏</view>
+    <view class="rank-row" wx:for="{{idle}}" wx:key="id" bindtap="goCloth" data-id="{{item.id}}">
+      <image class="rank-img" src="{{item.imageUrl}}" mode="aspectFill" />
+      <view class="rank-info">
+        <view class="rank-name">{{item.name}}</view>
+        <view class="rank-sub">{{item.categoryLabel}}</view>
+      </view>
+      <view class="rank-count idle">{{item.wearCount === 0 ? '从未穿过' : item.wearCount + ' 次'}}</view>
+    </view>
   </view>
 </view>
