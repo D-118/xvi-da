@@ -65,5 +65,9 @@ Page({
 
   goMatcher() {
     wx.switchTab({ url: '/pages/matcher/matcher' })
+  },
+
+  goRecommend() {
+    wx.navigateTo({ url: '/pages/recommend/recommend' })
   }
 })

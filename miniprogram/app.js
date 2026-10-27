@@ -2,7 +2,8 @@
 App({
   globalData: {
     baseUrl: 'http://localhost:8080', // 真机预览时改成电脑局域网 IP
-    token: ''
+    token: '',
+    adoptCombo: null // 推荐页"用这套"传递的衣物 id 列表
   },
 
   onLaunch() {

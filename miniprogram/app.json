@@ -7,7 +7,8 @@
     "pages/profile/profile",
     "pages/login/login",
     "pages/cloth-edit/cloth-edit",
-    "pages/cloth-detail/cloth-detail"
+    "pages/cloth-detail/cloth-detail",
+    "pages/recommend/recommend"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

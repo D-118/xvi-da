@@ -1,0 +1,46 @@
+<view class="container">
+  <!-- 天气卡 -->
+  <view class="weather-card" wx:if="{{weather}}">
+    <view class="w-main">
+      <text class="w-temp">{{weather.temp}}℃</text>
+      <text class="w-text">{{weather.text}}</text>
+    </view>
+    <view class="w-side">
+      <text class="w-tip">{{weather.tip}}</text>
+      <text wx:if="{{!weather.real}}" class="w-mock">示例天气（配置和风天气 key 后为实时数据）</text>
+    </view>
+  </view>
+  <view class="weather-card" wx:elif="{{loading}}">
+    <text class="w-text">天气与推荐计算中…</text>
+  </view>
+
+  <!-- 场合选择 -->
+  <view class="scene-row">
+    <text wx:for="{{scenes}}" wx:key="*this"
+          class="scene-chip {{scene === item ? 'active' : ''}}"
+          data-value="{{item}}" bindtap="setScene">{{item}}</text>
+  </view>
+
+  <!-- 汇总 -->
+  <view class="summary" wx:if="{{summary}}">{{summary}}</view>
+
+  <!-- 组合卡片 -->
+  <view wx:for="{{combos}}" wx:key="index" wx:for-item="combo" wx:for-index="idx" class="combo-card">
+    <view class="combo-head">
+      <text class="combo-rank {{idx === 0 ? 'top' : ''}}">{{idx === 0 ? '🏆 最优解' : '备选 ' + idx}}</text>
+      <text class="combo-score">{{combo.score}} 分</text>
+    </view>
+    <view class="combo-items">
+      <image wx:for="{{combo.items}}" wx:key="id" class="combo-img" src="{{item.imageFull}}" mode="aspectFill" />
+    </view>
+    <view class="reasons">
+      <text wx:for="{{combo.reasons}}" wx:key="*this" class="reason">· {{item}}</text>
+    </view>
+    <button class="adopt-btn" data-index="{{idx}}" bindtap="adopt">用这套去搭配台</button>
+  </view>
+
+  <!-- 空态 -->
+  <view wx:if="{{!loading && loaded && combos.length === 0}}" class="empty">
+    暂时无法生成推荐，先去衣橱补充几件当季衣物吧
+  </view>
+</view>

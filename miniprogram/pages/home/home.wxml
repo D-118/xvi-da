@@ -47,8 +47,8 @@
     </view>
   </view>
 
-  <!-- 天气条（P5 接入实时数据） -->
-  <view class="card weather-bar">
-    <text class="weather-text">🌤 天气推荐 · 即将上线</text>
+  <!-- 天气条 -->
+  <view class="card weather-bar" bindtap="goRecommend">
+    <text class="weather-text">🌤 天气穿搭推荐 · 按今天的天气挑一套</text>
   </view>
 </view>

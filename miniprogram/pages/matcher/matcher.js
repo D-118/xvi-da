@@ -22,6 +22,31 @@ Page({
   onShow() {
     this.loadCloset()
     this.loadOutfits()
+    this.adoptFromRecommend()
+  },
+
+  // 从推荐页点"用这套"跳转过来：自动回填选中的组合
+  adoptFromRecommend() {
+    const ids = app.globalData.adoptCombo
+    if (!ids || ids.length === 0) return
+    app.globalData.adoptCombo = null
+    // 等衣橱异步加载完成后再回填
+    const tryApply = (times) => {
+      const slots = this.data.slots
+      if (!slots || slots.length === 0) {
+        if (times > 0) setTimeout(() => tryApply(times - 1), 300)
+        return
+      }
+      const all = slots.flatMap(s => s.items)
+      const result = slots.map(s => ({
+        ...s,
+        picked: all.find(i => i.id === ids[s.slot - 1]) ||
+                all.find(i => ids.includes(i.id) && i.category === s.category) || null
+      }))
+      this.setData({ slots: result })
+      wx.showToast({ title: '已按推荐回填', icon: 'none' })
+    }
+    tryApply(10)
   },
 
   // 拉取在柜衣物，按分类填充四个滑道
