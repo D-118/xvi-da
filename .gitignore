@@ -19,3 +19,4 @@ Thumbs.db
 
 # 小程序
 miniprogram/project.private.config.json
+output/
