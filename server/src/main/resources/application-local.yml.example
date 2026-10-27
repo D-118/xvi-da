@@ -1,0 +1,23 @@
+# 本地配置模板
+# 用法：把本文件复制为同目录下的 application-local.yml，再填入自己的账号密码
+#   Windows: copy application-local.yml.example application-local.yml
+#   macOS/Linux: cp application-local.yml.example application-local.yml
+# 真实的 application-local.yml 已加入 .gitignore，不会被提交
+
+spring:
+  datasource:
+    username: root
+    # 改成你自己的 MySQL 密码
+    password: ""
+
+xvda:
+  wx:
+    # 微信小程序 AppSecret（微信公众平台 → 开发管理 → 开发设置）
+    # 留空时服务端按开发模式运行：openid 固定为 dev-mock-user，便于本地联调
+    secret: ""
+  jwt:
+    # 留空时服务端自动生成随机密钥（重启后旧 token 失效，生产环境请显式配置）
+    secret: ""
+  weather:
+    # 和风天气 API key（可选，留空则自动降级为按季节推测）
+    key: ""

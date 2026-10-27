@@ -21,3 +21,6 @@ Thumbs.db
 miniprogram/project.private.config.json
 output/
 test.png
+
+# 本地工作区数据（个人日志、缓存，不参与交付）
+.workbuddy/memory/

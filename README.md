@@ -1,5 +1,10 @@
 # XVI・搭（个人电子衣橱 · 电子橱窗微信小程序）
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![JDK](https://img.shields.io/badge/JDK-21-orange.svg)](https://adoptium.net/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1.svg)](https://www.mysql.com/)
+
 > 把每日穿搭像橱窗一样陈列：拍照建衣橱 → 搭配 → 打卡 → 按天气与风格推荐。
 
 「XVI・搭」是一个个人电子衣橱管理微信小程序，核心概念是**电子橱窗**——首页以大图陈列的方式展示你的"今日穿搭"，让衣橱管理变成一种每日穿搭打卡的仪式感。
@@ -23,14 +28,33 @@
 - **认证**：微信 `wx.login` + JWT
 - **天气数据**：和风天气 API（可选，未配置 key 时自动降级为按季节推荐）
 
+## 获取代码
+
+```bash
+git clone https://github.com/D-118/xvi-da.git
+cd xvi-da
+```
+
+## 目录结构
+
+```
+xvi-da/
+├── miniprogram/   微信小程序前端（原生 WXML / WXSS / JS）
+├── server/        Spring Boot 后端（Maven 工程）
+├── db/            数据库脚本：schema.sql 建表、data.sql 演示数据
+└── docs/          需求规格说明书、部署运行指南
+```
+
 ## 快速启动
 
-1. 建库：执行 `db/schema.sql`（MySQL 8）
-2. 配置：复制/编辑 `server/src/main/resources/application-local.yml`，填入数据库账号密码
-3. 启动后端：`cd server && mvn spring-boot:run`（默认端口 8080）
-4. 前端：用微信开发者工具打开 `miniprogram/` 目录，在「详情 → 本地设置」勾选**不校验合法域名**，并在 `project.config.json` 填入自己的 AppID
+前置环境：JDK 21、Maven 3.9+、MySQL 8、微信开发者工具。
 
-详细文档见 `docs/`。
+1. **建库**：执行 `db/schema.sql`（脚本自带 `CREATE DATABASE xvda`）；想直接看效果可再执行 `db/data.sql` 灌入 12 件演示衣物
+2. **配置**：把 `server/src/main/resources/application-local.yml.example` 复制为同目录下的 `application-local.yml`，填入 MySQL 用户名与密码
+3. **启动后端**：`cd server && mvn spring-boot:run`（默认端口 8080，启动后 `curl http://localhost:8080/api/ping` 应返回 pong）
+4. **运行前端**：用微信开发者工具打开 `miniprogram/` 目录，在「详情 → 本地设置」勾选**不校验合法域名**，并在 `project.config.json` 中填入自己的 AppID
+
+详细文档见 `docs/部署运行指南.md` 与 `docs/需求规格说明书.docx`。
 
 ## 原创声明
 
